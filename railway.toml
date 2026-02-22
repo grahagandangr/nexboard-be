@@ -1,6 +1,0 @@
-[build]
-builder = "NIXPACKS"
-buildCommand = "go mod download && go build -o main . && go install github.com/rubenv/sql-migrate/...@latest"
-
-[deploy]
-startCommand = "sql-migrate up -env=production && ./main"
