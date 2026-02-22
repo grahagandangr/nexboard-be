@@ -79,6 +79,33 @@ func (r *UserRepository) GetUserByExternalID(externalID string) (*models.User, e
 	return user, nil
 }
 
+// GetUserByID retrieves a user by ID
+func (r *UserRepository) GetUserByID(id int) (*models.User, error) {
+	user := &models.User{}
+	query := `
+		SELECT id, external_id, name, email, password, avatar_url, active_status, created_at, created_by, modified_at, modified_by
+		FROM users
+		WHERE id = $1 AND active_status = 1
+	`
+	err := r.DB.QueryRow(query, id).Scan(
+		&user.ID,
+		&user.ExternalID,
+		&user.Name,
+		&user.Email,
+		&user.Password,
+		&user.AvatarURL,
+		&user.ActiveStatus,
+		&user.CreatedAt,
+		&user.CreatedBy,
+		&user.ModifiedAt,
+		&user.ModifiedBy,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return user, nil
+}
+
 // UpdateUserProfile updates user's basic info
 func (r *UserRepository) UpdateUserProfile(user *models.User) error {
 	query := `

@@ -3,16 +3,17 @@ package models
 import "time"
 
 type Workspace struct {
-	ID           int        `json:"-"`
-	ExternalID   string     `json:"external_id"`
-	Name         string     `json:"name"`
-	Description  *string    `json:"description,omitempty"`
-	OwnerID      int        `json:"-"`
-	ActiveStatus int        `json:"active_status"`
-	CreatedAt    time.Time  `json:"created_at"`
-	CreatedBy    *string    `json:"created_by,omitempty"`
-	ModifiedAt   *time.Time `json:"modified_at,omitempty"`
-	ModifiedBy   *string    `json:"modified_by,omitempty"`
+	ID              int        `json:"-"`
+	ExternalID      string     `json:"external_id"`
+	Name            string     `json:"name"`
+	Description     *string    `json:"description,omitempty"`
+	OwnerID         int        `json:"-"`
+	OwnerExternalID string     `json:"-"` // Not output as json, used for mapping
+	ActiveStatus    int        `json:"active_status"`
+	CreatedAt       time.Time  `json:"created_at"`
+	CreatedBy       *string    `json:"created_by,omitempty"`
+	ModifiedAt      *time.Time `json:"modified_at,omitempty"`
+	ModifiedBy      *string    `json:"modified_by,omitempty"`
 }
 
 type WorkspaceResponse struct {
