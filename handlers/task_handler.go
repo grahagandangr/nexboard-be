@@ -18,7 +18,7 @@ func NewTaskHandler(taskService *services.TaskService) *TaskHandler {
 // CreateBoardTask processes inbound task requests
 func (h *TaskHandler) CreateBoardTask(c *gin.Context) {
 	userExtID, _ := c.Get("user_external_id")
-	boardExtID := c.Param("board_ext_id")
+	boardExtID := c.Param("external_id")
 
 	var req models.TaskRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -38,7 +38,7 @@ func (h *TaskHandler) CreateBoardTask(c *gin.Context) {
 // GetBoardTasks fetches all tasks linked to a board
 func (h *TaskHandler) GetBoardTasks(c *gin.Context) {
 	userExtID, _ := c.Get("user_external_id")
-	boardExtID := c.Param("board_ext_id")
+	boardExtID := c.Param("external_id")
 
 	tasks, err := h.taskService.GetBoardTasks(userExtID.(string), boardExtID)
 	if err != nil {

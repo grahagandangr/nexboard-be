@@ -18,7 +18,7 @@ func NewBoardHandler(boardService *services.BoardService) *BoardHandler {
 // CreateWorkspaceBoard handles creating a new board
 func (h *BoardHandler) CreateWorkspaceBoard(c *gin.Context) {
 	userExtID, _ := c.Get("user_external_id")
-	workspaceExtID := c.Param("workspace_ext_id")
+	workspaceExtID := c.Param("external_id")
 
 	var req models.BoardRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -38,7 +38,7 @@ func (h *BoardHandler) CreateWorkspaceBoard(c *gin.Context) {
 // GetWorkspaceBoards lists boards within a workspace
 func (h *BoardHandler) GetWorkspaceBoards(c *gin.Context) {
 	userExtID, _ := c.Get("user_external_id")
-	workspaceExtID := c.Param("workspace_ext_id")
+	workspaceExtID := c.Param("external_id")
 
 	boards, err := h.boardService.GetWorkspaceBoards(userExtID.(string), workspaceExtID)
 	if err != nil {

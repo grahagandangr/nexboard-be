@@ -90,7 +90,7 @@ func main() {
 				}
 
 				// Workspace Boards
-				boards := workspaces.Group("/:workspace_ext_id/boards")
+				boards := workspaces.Group("/:external_id/boards")
 				{
 					boards.POST("", boardHandler.CreateWorkspaceBoard)
 					boards.GET("", boardHandler.GetWorkspaceBoards)
@@ -105,7 +105,7 @@ func main() {
 				boards.DELETE("/:external_id", boardHandler.DeleteBoard)
 
 				// Board Tasks
-				tasks := boards.Group("/:board_ext_id/tasks")
+				tasks := boards.Group("/:external_id/tasks")
 				{
 					tasks.POST("", taskHandler.CreateBoardTask)
 					tasks.GET("", taskHandler.GetBoardTasks)
