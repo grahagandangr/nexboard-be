@@ -1,0 +1,11 @@
+development:
+  dialect: postgres
+  datasource: postgres://postgres:postgres@localhost:5432/nexboard?sslmode=disable
+  dir: migrations
+  table: migrations
+
+production:
+  dialect: postgres
+  datasource: $DATABASE_URL
+  dir: migrations
+  table: migrations
